@@ -1,6 +1,5 @@
 import {Link} from "react-router-dom"
 import stukLogoBranco from '../../assets/StukLogoBranco.svg'
-import '../../App.css'
 import './Login.css'
 
 

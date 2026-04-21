@@ -1,4 +1,4 @@
-.login-container {
+.registro-container {
     width: 60%;
     display: flex;
     flex-direction: column;
@@ -9,23 +9,34 @@
     padding-top: 120px;
 }
 
+.inputs .input-nome,
 .inputs .input-email,
-.inputs .input-senha {
+.inputs .input-senha,
+.inputs .input-confirmarsenha,
+.inputs .input-role {
     width: 65%;
     padding: 5px;
 
-
     border-radius: 10px;
     border: 1px solid #d1d5db;
-
 
     outline: none;
     transition: 0.3s;
 }
 
+.input-nome:hover,
 .input-email:hover,
-.input-senha:hover {
+.input-senha:hover,
+.input-confirmarsenha:hover,
+.input-role:hover {
     transform: translateY(-2px);
 
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }    
+
+.tem-conta {
+    max-width: 400px;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}

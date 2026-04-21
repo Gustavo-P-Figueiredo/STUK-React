@@ -27,6 +27,27 @@
     color: white;
 }
 
+.logo-container .stuklogo {
+    max-width: 800px;
+    width: 100%;
+    height: auto;
+}
+
+.logo-container .stuklogoBranco {
+    max-width: 800px;
+    width: 100%;
+    height: auto;
+}
+
+.cabecalho {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    align-items: flex-start;
+}
+
+
 .menu-actions {
     display: flex;
     gap: 20px;
@@ -37,6 +58,7 @@
     display: flex;
     flex-direction: column;
     font-size: 20px;
+    align-items: flex-start;
 }
 
 .botao-principal {
@@ -51,4 +73,10 @@
 
     background-color: #044cb6;
     background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+}
+
+.botao-principal:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
