@@ -1,5 +1,7 @@
 import {Link} from "react-router-dom"
 import stukLogoBranco from '../../assets/StukLogoBranco.svg'
+import '../../App.css'
+import './Login.css'
 
 
 export default function Login(){
@@ -7,7 +9,7 @@ export default function Login(){
         <div className="page-container">
 
             <div className="background-container">
-                <div className="menu-logo">
+                <div className="logo-container">
                     <img 
                         src={stukLogoBranco} 
                         alt="Logo STUK branco" 
@@ -27,16 +29,16 @@ export default function Login(){
 
                 <div className="inputs">
                     <h5>Email</h5>
-                    <input className="email" type="text" placeholder="Seu@email.com" />
+                    <input className="input-email" type="text" placeholder="Seu@email.com" />
 
                     <h5>Senha</h5>
-                    <input className="senha" type="text" placeholder="********" />
+                    <input className="input-senha" type="text" placeholder="********" />
                 </div>
 
                 <p className="esqueceusenha">Esqueceu sua senha? Entre em contato com seu gestor</p>
 
                 <div className="menu-actions">
-                    <Link className="botao confirmar" to="/dashboard">
+                    <Link className="botao-principal" to="/dashboard">
                         Login
                     </Link>
                 </div>

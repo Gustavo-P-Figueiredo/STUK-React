@@ -10,15 +10,7 @@
     background: linear-gradient(135deg, #a2c4f9, #dbdee1);
 }
 
-.menu-logo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    color: white;
-}
-
-.menu-logo .stuklogo {
+.logo-container .stuklogo {
     max-width: 800px;
     width: 100%;
     height: auto;
