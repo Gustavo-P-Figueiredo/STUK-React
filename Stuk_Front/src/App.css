@@ -1,0 +1,24 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.menu-actions {
+    display: flex;
+    gap: 20px;
+}
+
+.botao-principal {
+    padding: 12px 28px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+
+    text-align: center;
+    color: white;
+
+    background-color: #044cb6;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+}

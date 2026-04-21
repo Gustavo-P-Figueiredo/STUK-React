@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom"
 import stukLogo from '../../assets/StukLogo.svg'
-import "../Menu/Menu.css"
 import "../../App.css"
+import "./Menu.css"
 
 export default function Menu() {
     return (
@@ -18,7 +18,7 @@ export default function Menu() {
             </div>
 
             <nav className="menu-actions">
-                <Link className="botao-login" to="/login">
+                <Link className="botao-principal" to="/login">
                     Login
                 </Link>
             </nav>

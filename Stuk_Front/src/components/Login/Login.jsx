@@ -1,6 +1,5 @@
 import {Link} from "react-router-dom"
 import stukLogoBranco from '../../assets/StukLogoBranco.svg'
-import "../Login/Login.css"
 
 
 export default function Login(){
