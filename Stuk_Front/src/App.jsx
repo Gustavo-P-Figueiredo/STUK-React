@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Menu from "./components/Menu/Menu.jsx"
 import Registro from "./components/Registro/Registro.jsx"
 import Login from "./components/Login/Login.jsx"
-import Grid from "./components/Grid/Grid.jsx"
+import Dashboard from './components/Grid/Grid.jsx'
 
 
 function App() {
@@ -14,6 +14,7 @@ function App() {
         <Route path="/" element={<Menu />} />
         <Route path="/registro" element={<Registro />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
   )

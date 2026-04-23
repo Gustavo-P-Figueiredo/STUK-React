@@ -1,11 +1,11 @@
 .menu-container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 
-    padding: 20px;
-    background: linear-gradient(135deg, #a2c4f9, #dbdee1);
+  padding: 20px;
+  background: linear-gradient(160deg, #3a7bd5, #dbdee1);
 }

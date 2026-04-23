@@ -19,6 +19,40 @@
     display: flex;
 }
 
+.dashboard-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.cards {
+    width: 40%;
+    display: flex;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 18px;
+
+    padding: 35px 28px;
+
+    color: gray;
+    background-color: #FFFFFF;
+}
+
+.header {
+  height: 70px;
+  width: 100%;
+  color: #f0f0f0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: #FFFFFF;
+  padding: 0 20px;
+}
+
 .logo-container {
     display: flex;
     flex-direction: column;
@@ -47,6 +81,15 @@
     align-items: flex-start;
 }
 
+.totalizadores-container {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: flex-start;
+
+    padding: 20px;
+}
 
 .menu-actions {
     display: flex;

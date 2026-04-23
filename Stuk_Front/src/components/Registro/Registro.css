@@ -1,12 +1,12 @@
 .registro-container {
-    width: 60%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
 
-    padding-top: 120px;
+  padding-top: 120px;
 }
 
 .inputs .input-nome,
@@ -14,14 +14,14 @@
 .inputs .input-senha,
 .inputs .input-confirmarsenha,
 .inputs .input-role {
-    width: 65%;
-    padding: 5px;
+  width: 65%;
+  padding: 5px;
 
-    border-radius: 10px;
-    border: 1px solid #d1d5db;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
 
-    outline: none;
-    transition: 0.3s;
+  outline: none;
+  transition: 0.3s;
 }
 
 .input-nome:hover,
@@ -29,14 +29,14 @@
 .input-senha:hover,
 .input-confirmarsenha:hover,
 .input-role:hover {
-    transform: translateY(-2px);
+  transform: translateY(-2px);
 
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-}    
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
 
 .tem-conta {
-    max-width: 400px;
-    display: flex;
-    flex-direction: row;
-    text-align: center;
+  max-width: 400px;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
 }
