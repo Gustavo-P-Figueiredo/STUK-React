@@ -3,9 +3,14 @@ import { Link } from "react-router-dom";
 import stukLogo from "../../assets/StukLogo.svg";
 import { FaUserEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+
 import "./Grid.css";
 
+import { useUsers } from "../../hooks/useUser";
+
 export default function Dashboard() {
+  const { users } = useUsers();
+
   const [menuAberto, setMenuAberto] = useState(false);
 
   const usuario = {
@@ -81,76 +86,19 @@ export default function Dashboard() {
                 <th>Ações</th>
               </tr>
             </thead>
-
             <tbody>
-              <tr>
-                <td>
-                  <div class="user">
-                    <div class="avatar">A</div>
-                    Ana Costa
-                  </div>
-                </td>
-                <td>ana@email.com</td>
-                <td>
-                  <span>Admin</span>
-                </td>
-                <td class="acoes">
-                  <FaUserEdit />
-                  <MdDelete />
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <div class="user">
-                    <div class="avatar">B</div>
-                    Bruno Lima
-                  </div>
-                </td>
-                <td>bruno@email.com</td>
-                <td>
-                  <span>Usuário</span>
-                </td>
-                <td class="acoes">
-                  <FaUserEdit />
-                  <MdDelete />
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <div class="user">
-                    <div class="avatar">C</div>
-                    Carla Santos
-                  </div>
-                </td>
-                <td>carla@email.com</td>
-                <td>
-                  <span>Usuário</span>
-                </td>
-                <td class="acoes">
-                  <FaUserEdit />
-                  <MdDelete />
-                </td>
-              </tr>
+              {users.map((user) => (
+                <tr key={user.nome}>
+                  <td>{user.nome}</td>
+                  <td>{user.email}</td>
+                  <td>{user.roles}</td>
+                  <td className="acoes">
+                    <FaUserEdit />
+                    <MdDelete />
+                  </td>
+                </tr>
+              ))}
             </tbody>
-
-            <tr>
-              <td>
-                <div class="user">
-                  <div class="avatar">B</div>
-                  Bruno Lima
-                </div>
-              </td>
-              <td>bruno@email.com</td>
-              <td>
-                <span>Usuário</span>
-              </td>
-              <td class="acoes">
-                <FaUserEdit />
-                <MdDelete />
-              </td>
-            </tr>
           </table>
         </div>
       </div>

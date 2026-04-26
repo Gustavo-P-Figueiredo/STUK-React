@@ -1,8 +1,17 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import stukLogoBranco from "../../assets/StukLogoBranco.svg";
 import "./Login.css";
 
+import { useLogin } from "../../hooks/UseLogin"
+
 export default function Login() {
+
+  const [email, setEmail] = useState("")
+  const [senha, setSenha] = useState("")
+
+  const { pegarLogin } = useLogin();
+
   return (
     <div className="page-container">
       <div className="background-container">
@@ -26,12 +35,15 @@ export default function Login() {
           <h5>Email</h5>
           <input
             className="input-email"
-            type="text"
             placeholder="Seu@email.com"
+            onChange={(e) => setEmail(e.target.value)}
           />
 
           <h5>Senha</h5>
-          <input className="input-senha" type="text" placeholder="********" />
+          <input className="input-senha"
+           placeholder="********" 
+           onChange={(e) => setSenha(e.target.value)}
+           />
         </div>
 
         <p className="esqueceusenha">
