@@ -1,22 +1,23 @@
-import { useState } from "react";
-import { auntenticar } from "../service/LoginService";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { autenticar } from "../service/LoginService";
+import { LoginContext } from "../context/LoginContext";
 
 export function useLogin() {
-  const [user, setUser] = useState(null);
+  const { login } = useContext(LoginContext);
+  const navigate = useNavigate();
 
-  async function pegarlogin(email, senha) {
+  async function pegarLogin(email, senha) {
     try {
-      const response = await useLogin({ email, senha });
+      const response = await autenticar({ email, senha });
 
-      const token = response.data.token;
-
-      localStorage.setItem("token", token);
-
-      setUser({ email });
+      login(response.data);
+      navigate("/dashboard");
     } catch (erro) {
-      console.error("Erro no login", erro);
+      console.error("Erro no login:", erro);
+      throw erro;
     }
   }
 
-  return { user, pegarlogin };
+  return { pegarLogin };
 }

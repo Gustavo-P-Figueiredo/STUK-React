@@ -1,16 +1,36 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import stukLogoBranco from "../../assets/StukLogoBranco.svg";
 import "./Login.css";
 
-import { useLogin } from "../../hooks/UseLogin"
+import { useLogin } from "../../hooks/UseLogin";
 
 export default function Login() {
-
-  const [email, setEmail] = useState("")
-  const [senha, setSenha] = useState("")
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [erro, setErro] = useState("");
+  const [carregando, setCarregando] = useState(false);
 
   const { pegarLogin } = useLogin();
+
+  async function chamarLogin() {
+    if (!email || !senha) {
+      setErro("Preencha as credencias de login");
+      return;
+    }
+
+    setErro("");
+    setCarregando(true);
+
+    try {
+      await pegarLogin(email, senha);
+    } catch {
+      setErro("E-mail ou senha incorreto");
+    } finally {
+      setCarregando(false);
+    }
+  }
 
   return (
     <div className="page-container">
@@ -36,24 +56,35 @@ export default function Login() {
           <input
             className="input-email"
             placeholder="Seu@email.com"
+            type="email"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
           <h5>Senha</h5>
-          <input className="input-senha"
-           placeholder="********" 
-           onChange={(e) => setSenha(e.target.value)}
-           />
+          <input
+            className="input-senha"
+            placeholder="********"
+            type="password"
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && pegarLogin()}
+          />
         </div>
+
+        {erro && <p style={{ color: "red", fontSize: "20px" }}>{erro}</p>}
 
         <p className="esqueceusenha">
           Esqueceu sua senha? Entre em contato com seu gestor
         </p>
 
         <div className="menu-actions">
-          <Link className="botao-principal" to="/dashboard">
-            Login
-          </Link>
+          <button
+            className="botao-principal"
+            onClick={chamarLogin}
+            >
+            {carregando ? "Entrando..." : "Login"}
+          </button>
         </div>
       </div>
     </div>
