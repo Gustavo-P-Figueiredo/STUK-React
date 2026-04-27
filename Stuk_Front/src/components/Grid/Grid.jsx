@@ -86,14 +86,14 @@ export default function Dashboard() {
       </header>
 
       <div className="totalizadores-container">
-        <div className="cards">
-          <p>Total de usuarios</p>
-          <strong>{users.length}</strong>
+        <div className="card-totalizadores">
+          <p>Total de usuarios:</p>
+          <strong className="totalUsuarios">{users.length}</strong>
         </div>
 
-        <div className="cards">
-          <p>Admins</p>
-          <strong>{totalAdmins}</strong>
+        <div className="card-totalizadores">
+          <p>Admins:</p>
+          <strong className="totalAdmins">{totalAdmins}</strong>
         </div>
       </div>
 
@@ -146,10 +146,7 @@ export default function Dashboard() {
                     </td>
                     <td>{u.email}</td>
                     <td>{u.roles}</td>
-                    <td
-                      className="acoes"
-                      style={{ display: "flex", gap: "12px" }}
-                    >
+                    <td className="acoes">
                       <Link to={`/registrar?editar=${u.email}`} title="Editar">
                         <FaUserEdit
                           style={{ color: "#3a7bd5", fontSize: "18px" }}

@@ -66,6 +66,28 @@
   justify-content: center;
 }
 
+.card-totalizadores {
+    width: 40%;
+    display: flex;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 18px;
+
+    padding: 35px 28px;
+    color: #777;
+    background-color: #FFFFFF;
+}
+
+.card-totalizadores .totalUsuarios {
+  padding: 0px 5px;
+  color: #3a7bd5;
+}
+
+.card-totalizadores .totalAdmins {
+  padding: 0px 5px;
+  color: #3a7bd5;
+}
+
 .card-grid {
   width: 90%;
   background: white;
@@ -131,5 +153,4 @@
 
 .acoes {
   cursor: pointer;
-  font-size: 16px;
 }
