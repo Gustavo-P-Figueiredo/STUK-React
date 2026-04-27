@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useContext } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import stukLogo from "../../assets/StukLogo.svg";
 import { FaUserEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
@@ -7,22 +7,55 @@ import { MdDelete } from "react-icons/md";
 import "./Grid.css";
 
 import { useUsers } from "../../hooks/useUser";
+import { deleteUser } from "../../service/GridService";
+import { LoginContext } from "../../context/LoginContext";
 
 export default function Dashboard() {
-  const { users } = useUsers();
+  const { users, setUsers } = useUsers();
+  const { user, logoff } = useContext(LoginContext);
+  const navigate = useNavigate();
 
   const [menuAberto, setMenuAberto] = useState(false);
+  const [busca, setBusca] = useState("");
 
-  const usuario = {
-    nome: "Caique Silva",
-  };
+  const iniciais = user?.nome
+    ? user.nome
+        .split(" ")
+        .map((n) => n[0])
+        .join("")
+        .toUpperCase()
+        .slice(0, 2)
+    : "U";
 
-  const iniciais = usuario.nome
-    .split(" ")
-    .map((n) => n[0])
-    .join("")
-    .toUpperCase()
-    .slice(0, 2);
+  const nomeExibido = user?.nome || "Usuário";
+
+  async function deleteUsuario(email) {
+    if (!window.confirm(`Deseja deletar o usuário ${email}?`)) return;
+    try {
+      await deleteUser(email);
+      setUsers((prev) => prev.filter((u) => u.email !== email));
+
+      alert("Usuario deletado");
+    } catch (erro) {
+      console.log("Erro ao deletar usuario", erro);
+      alert("Erro ao deletar usuario");
+    }
+  }
+
+  function logOff() {
+    logoff();
+    navigate("/");
+  }
+
+  const usuariosFiltrados = users.filter(
+    (u) =>
+      u.nome?.toLowerCase().includes(busca.toLowerCase()) ||
+      u.email?.toLowerCase().includes(busca.toLowerCase()),
+  );
+
+  const totalAdmins = users.filter((u) =>
+    u.roles?.toLowerCase().includes("admin"),
+  ).length;
 
   return (
     <div style={{ backgroundColor: "#fcf7f8" }} className="dashboard-container">
@@ -44,8 +77,8 @@ export default function Dashboard() {
 
             {menuAberto && (
               <div className="dropdown">
-                <p>{usuario.nome}</p>
-                <button>Sair</button>
+                <p>{nomeExibido}</p>
+                <button onClick={logOff}>Sair</button>
               </div>
             )}
           </div>
@@ -55,10 +88,12 @@ export default function Dashboard() {
       <div className="totalizadores-container">
         <div className="cards">
           <p>Total de usuarios</p>
+          <strong>{users.length}</strong>
         </div>
 
         <div className="cards">
           <p>Admins</p>
+          <strong>{totalAdmins}</strong>
         </div>
       </div>
 
@@ -74,6 +109,8 @@ export default function Dashboard() {
               type="text"
               placeholder="Buscar usuário..."
               className="pesquisar"
+              value={busca}
+              onChange={(e) => setBusca(e.target.value)}
             />
           </div>
 
@@ -87,17 +124,50 @@ export default function Dashboard() {
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => (
-                <tr key={user.nome}>
-                  <td>{user.nome}</td>
-                  <td>{user.email}</td>
-                  <td>{user.roles}</td>
-                  <td className="acoes">
-                    <FaUserEdit />
-                    <MdDelete />
+              {usuariosFiltrados.length === 0 ? (
+                <tr>
+                  <td
+                    colSpan={4}
+                    style={{ textAlign: "center", color: "#aaa" }}
+                  >
+                    Nenhum usuário encontrado.
                   </td>
                 </tr>
-              ))}
+              ) : (
+                usuariosFiltrados.map((u) => (
+                  <tr key={u.email}>
+                    <td>
+                      <div className="user">
+                        <div className="avatar">
+                          {u.nome?.[0]?.toUpperCase() ?? "?"}
+                        </div>
+                        {u.nome}
+                      </div>
+                    </td>
+                    <td>{u.email}</td>
+                    <td>{u.roles}</td>
+                    <td
+                      className="acoes"
+                      style={{ display: "flex", gap: "12px" }}
+                    >
+                      <Link to={`/registrar?editar=${u.email}`} title="Editar">
+                        <FaUserEdit
+                          style={{ color: "#3a7bd5", fontSize: "18px" }}
+                        />
+                      </Link>
+                      <MdDelete
+                        title="Deletar"
+                        style={{
+                          color: "#e53e3e",
+                          fontSize: "18px",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => deleteUsuario(u.email)}
+                      />
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>

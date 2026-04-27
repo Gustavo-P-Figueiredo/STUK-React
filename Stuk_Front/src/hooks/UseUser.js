@@ -18,4 +18,11 @@ export function useUsers() {
   }, []);
 
   return { users };
+
+
+  useEffect(() => {
+    loadUsers();
+  }, [loadUsers]);
+ 
+  return { users, setUsers, recarregar: loadUsers };
 }

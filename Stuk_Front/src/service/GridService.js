@@ -3,7 +3,8 @@ import { useState } from "react";
 
 export const getUsers = () => api.get("/usuario");
 
-export const alterUser = (data) => api.put("/atualizarUsuario", data);
+export const alterUser = (email, data) =>
+  api.put(`/usuario/atualizarUsuario?email=${email}`, data);
 
-export const deleteUser = (email) => api.delete(`/usuario/delete${email}`);
-
+export const deleteUser = (email) =>
+  api.delete(`/usuario/delete?email=${email}`);
