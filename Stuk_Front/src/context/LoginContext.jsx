@@ -3,23 +3,22 @@ import { createContext, useState, useEffect } from "react";
 export const LoginContext = createContext();
 
 export function LoginProvider({ children }) {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
+  const [user, setUser] = useState(() => {
     const token = localStorage.getItem("token");
+    const savedUser = localStorage.getItem("user");
 
-    if (token) {
-      setUser({ token });
-    }
-  }, []);
+    return token && savedUser ? JSON.parse(savedUser) : null;
+  });
 
   function login(data) {
     localStorage.setItem("token", data.token);
+    localStorage.setItem("user", JSON.stringify(data));
     setUser(data);
   }
 
   function logoff() {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     setUser(null);
   }
 

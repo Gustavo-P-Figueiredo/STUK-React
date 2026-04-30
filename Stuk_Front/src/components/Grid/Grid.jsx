@@ -11,7 +11,7 @@ import { deleteUser } from "../../service/GridService";
 import { LoginContext } from "../../context/LoginContext";
 
 export default function Dashboard() {
-  const { users, setUsers } = useUsers();
+const { users, setUsers, recarregar } = useUsers();
   const { user, logoff } = useContext(LoginContext);
   const navigate = useNavigate();
 
@@ -29,18 +29,19 @@ export default function Dashboard() {
 
   const nomeExibido = user?.nome || "Usuário";
 
-  async function deleteUsuario(email) {
-    if (!window.confirm(`Deseja deletar o usuário ${email}?`)) return;
-    try {
-      await deleteUser(email);
-      setUsers((prev) => prev.filter((u) => u.email !== email));
+async function deleteUsuario(email) {
+  if (!window.confirm(`Deseja deletar o usuário ${email}?`)) return;
 
-      alert("Usuario deletado");
-    } catch (erro) {
-      console.log("Erro ao deletar usuario", erro);
-      alert("Erro ao deletar usuario");
-    }
+  try {
+    const res = await deleteUser(email);
+    alert("Usuário deletado");
+    
+    await recarregar();
+    
+  } catch (erro) {
+    console.log("Erro específico:", erro.message, erro.stack);
   }
+}
 
   function logOff() {
     logoff();
@@ -66,7 +67,7 @@ export default function Dashboard() {
         </div>
 
         <div className="header-direita">
-          <Link className="botao-principal" to="/registro">
+          <Link className="botao-principal" to="/registrar">
             Novo usuário
           </Link>
 

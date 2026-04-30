@@ -41,10 +41,14 @@ export default function Registro() {
 
     try {
       if (modoEdicao) {
-        // ← passa email como query param e body com nome e role
         await alterUser(emailEditar, { nome, roles: role });
       } else {
-        await api.post("/autenticacao/registrar", { nome, email, senha, roles: role });
+        await api.post("/autenticacao/registrar", {
+          nome,
+          email,
+          senha,
+          roles: role,
+        });
       }
       navigate("/dashboard");
     } catch (error) {
@@ -126,7 +130,7 @@ export default function Registro() {
           <input
             className="input-role"
             type="text"
-            placeholder="ADMIN ou USER"
+            placeholder="ADMIN / USER"
             value={role}
             onChange={(e) => setRole(e.target.value)}
           />
@@ -144,9 +148,6 @@ export default function Registro() {
         )}
 
         <div className="menu-actions">
-          <Link className="botao-secundario" to="/dashboard">
-            Cancelar
-          </Link>
           <button
             className="botao-principal"
             onClick={handleSubmit}
@@ -155,9 +156,13 @@ export default function Registro() {
             {carregando
               ? "Salvando..."
               : modoEdicao
-              ? "Salvar alterações"
-              : "Criar usuário"}
+                ? "Salvar alterações"
+                : "Criar usuário"}
           </button>
+
+          <Link className="botao-secundario" to="/dashboard">
+            Cancelar
+          </Link>
         </div>
       </div>
     </div>
